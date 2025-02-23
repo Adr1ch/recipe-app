@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 
 // const API_URL = "http://localhost:3000/api/recipes";
-const API_URL = "/api/recipes";
+const API_URL =
+  "https://recipe-app-git-main-adr1chs-projects.vercel.app/api/recipes";
 
 export async function getTodo() {
   const data = await fetch(API_URL, {
