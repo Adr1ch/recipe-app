@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = "https://recipe-app-two-psi.vercel.app";
 
 export async function getTodo() {
   const data = await fetch(`${API_URL}/api/recipes`, {
