@@ -3,7 +3,7 @@ import CreateRecipe from "./_components/CreateItemRecipe";
 import { getTodo } from "./actions/recipes";
 
 export default async function Home() {
-  console.log("123");
+  console.log("1234");
 
   const response = await getTodo();
   return (
