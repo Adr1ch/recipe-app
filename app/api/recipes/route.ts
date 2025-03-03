@@ -19,10 +19,19 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { title, description } = await req.json();
+    const { title, description, ownerId } = await req.json();
+
+    if (!ownerId) {
+      return new Response(JSON.stringify({ error: "ownerId is required" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     const recipe = await prisma.recipe.create({
-      data: { title, description },
+      data: { title, description, ownerId },
     });
+
     return new Response(JSON.stringify(recipe), {
       status: 201,
       headers: { "Content-Type": "application/json" },
