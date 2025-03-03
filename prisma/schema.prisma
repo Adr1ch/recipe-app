@@ -25,10 +25,13 @@ model User {
   profileImage  String?
   role          String?
   id            String             @id @default(uuid())
+  recipes       Recipe[]
 }
 model Recipe {
   id          String   @id @default(uuid())
   title       String
   description String?
   createdAt   DateTime @default(now())
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id])
 }
