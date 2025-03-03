@@ -15,8 +15,7 @@ export default async function Home() {
     },
   });
 
-  const recipeResponse = await getTodo();
-  const recipeData = await recipeResponse.json();
+  const recipeData = await prisma.recipe.findMany();
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -27,7 +26,7 @@ export default async function Home() {
           <pre>{JSON.stringify(userData, null, 2)}</pre>
         </div>
         <CreateRecipe />
-        <div>recipeData: {recipeData}</div>
+        <div>recipeData: {JSON.stringify(recipeData, null, 2)}</div>
       </main>
     </div>
   );
