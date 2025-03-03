@@ -2,7 +2,8 @@ export default async function RecipeList(data: {
   recipes: Array<{
     id: string;
     title: string;
-    description: string;
+    description: string | null;
+    ownerId: string;
     createdAt: Date;
   }>;
 }) {

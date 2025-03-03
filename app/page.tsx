@@ -1,4 +1,5 @@
 import LogoutButton from "./_components/LogoutBtn";
+import RecipeList from "./_components/RecipeList";
 import CreateRecipe from "./_components/CreateItemRecipe";
 
 import { createClient } from "@/utils/supabase/server";
@@ -26,7 +27,7 @@ export default async function Home() {
           <pre>{JSON.stringify(userData, null, 2)}</pre>
         </div>
         <CreateRecipe />
-        <div>recipeData: {JSON.stringify(recipeData, null, 2)}</div>
+        <RecipeList recipes={recipeData} />
       </main>
     </div>
   );
