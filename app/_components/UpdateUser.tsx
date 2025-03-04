@@ -1,30 +1,30 @@
 "use client";
 
-import { createRecipe } from "../actions/recipes";
+import { updateUser } from "../actions/profile";
 
-export default function CreateRecipe() {
+export default function UpdateUser() {
   return (
     <div className="bg-gray-900 w-full text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-semibold text-center text-indigo-500 mb-8">
-          Створити рецепт
+          Оновити користувача
         </h1>
         <form
-          action={createRecipe}
+          action={updateUser}
           className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-6"
         >
           <div>
             <label
-              htmlFor="title"
+              htmlFor="firstName"
               className="block text-sm font-medium text-gray-300 mb-2"
             >
-              Назва рецепту
+              Імя
             </label>
             <input
-              id="title"
+              id="firstName"
               type="text"
-              name="title"
-              placeholder="Назва рецепту"
+              name="firstName"
+              placeholder="Імя"
               required
               className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
@@ -32,15 +32,15 @@ export default function CreateRecipe() {
 
           <div>
             <label
-              htmlFor="description"
+              htmlFor="lastName"
               className="block text-sm font-medium text-gray-300 mb-2"
             >
-              Опис
+              Прізвище
             </label>
-            <textarea
-              id="description"
-              name="description"
-              placeholder="Опис"
+            <input
+              id="lastName"
+              name="lastName"
+              placeholder="Прізвище"
               required
               className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
@@ -50,7 +50,7 @@ export default function CreateRecipe() {
             type="submit"
             className="w-full py-3 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
           >
-            Створити
+            Оновити
           </button>
         </form>
       </div>
