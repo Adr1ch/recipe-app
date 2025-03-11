@@ -1,4 +1,4 @@
-import { login, signup } from "../login/actions";
+import { login, signup } from "../(public)/login/actions";
 
 export default function SignInForm() {
   return (

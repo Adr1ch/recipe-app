@@ -9,34 +9,34 @@ export default function UserClient({ user }: { user: any }) {
         </h1>
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
           <p className="text-lg font-medium text-gray-300">
-            <span className="text-indigo-400">ID:</span> {user.id}
+            <span className="text-indigo-400">ID:</span> {user?.id}
           </p>
           <p className="text-lg font-medium text-gray-300">
-            <span className="text-indigo-400">Email:</span> {user.email}
+            <span className="text-indigo-400">Email:</span> {user?.email}
           </p>
           <p className="text-lg font-medium text-gray-300">
             <span className="text-indigo-400">Ім'я:</span>{" "}
-            {user.firstName || "Не вказано"}
+            {user?.firstName || "Не вказано"}
           </p>
           <p className="text-lg font-medium text-gray-300">
             <span className="text-indigo-400">Прізвище:</span>{" "}
-            {user.lastName || "Не вказано"}
+            {user?.lastName || "Не вказано"}
           </p>
           <p className="text-lg font-medium text-gray-300">
             <span className="text-indigo-400">Про мене:</span>{" "}
-            {user.aboutMe || "Не вказано"}
+            {user?.aboutMe || "Не вказано"}
           </p>
           <p className="text-lg font-medium text-gray-300">
             <span className="text-indigo-400">Алергени:</span>{" "}
-            {user.allergens.length > 0 ? user.allergens.join(", ") : "Немає"}
+            {user?.allergens?.length > 0 ? user.allergens.join(", ") : "Немає"}
           </p>
           <p className="text-lg font-medium text-gray-300">
-            <span className="text-indigo-400">Роль:</span> {user.role}
+            <span className="text-indigo-400">Роль:</span> {user?.role}
           </p>
-          {user.profileImage && (
+          {user?.profileImage && (
             <div className="mt-4">
               <img
-                src={user.profileImage}
+                src={user?.profileImage}
                 alt="Profile"
                 className="w-32 h-32 rounded-full mx-auto border-2 border-indigo-500"
               />

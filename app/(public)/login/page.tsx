@@ -1,6 +1,6 @@
 import { login, signup } from "./actions";
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <form className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-6">
       <label
