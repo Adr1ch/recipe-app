@@ -1,9 +1,8 @@
 import { type EmailOtpType } from "@supabase/supabase-js";
 import { type NextRequest } from "next/server";
-
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
+import { addOrCreateUser } from "@/app/actions/profile";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -20,32 +19,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!error) {
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
-
-      if (user && !userError) {
-        let existingUser = await prisma.user.findUnique({
-          where: { id: user.id },
-        });
-
-        if (!existingUser) {
-          existingUser = await prisma.user.create({
-            data: {
-              id: user.id,
-              email: user.email!,
-              firstName: "",
-              lastName: "",
-              aboutMe: null,
-              allergens: [],
-              profileImage: null,
-              role: "user",
-            },
-          });
-        }
-      }
-
+      await addOrCreateUser();
       redirect(next);
     }
   }

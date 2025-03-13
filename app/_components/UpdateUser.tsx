@@ -1,6 +1,7 @@
 "use client";
 
-import { updateUser } from "../actions/profile";
+import { useState } from "react";
+import { updateUser } from "@/app/actions/profile";
 
 export default function UpdateUser() {
   return (

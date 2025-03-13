@@ -14,14 +14,14 @@ export async function getRecipe() {
 }
 
 export async function getUserRecipes() {
-  const supabase = await createClient();
-  const { data, error: authError } = await supabase.auth.getUser();
-
-  if (authError || !data?.user) {
-    throw new Error("User is not authenticated");
-  }
-
   try {
+    const supabase = await createClient();
+    const { data, error: authError } = await supabase.auth.getUser();
+
+    if (authError || !data?.user) {
+      throw new Error("User is not authenticated");
+    }
+
     return await prisma.recipe.findMany({
       where: { ownerId: data.user.id },
     });
@@ -32,29 +32,30 @@ export async function getUserRecipes() {
 }
 
 export async function createRecipe(formDataValue: FormData) {
-  const supabase = await createClient();
-  const { data, error: authError } = await supabase.auth.getUser();
-
-  if (authError || !data?.user) {
-    throw new Error("User is not authenticated");
-  }
-
-  const title = formDataValue.get("title")?.toString().trim() || "";
-  const description = formDataValue.get("description")?.toString().trim() || "";
-  const ownerId = data.user.id;
-
-  if (!title || !description) {
-    throw new Error("Title and description are required");
-  }
-
   try {
+    const supabase = await createClient();
+    const { data, error: authError } = await supabase.auth.getUser();
+
+    if (authError || !data?.user) {
+      throw new Error("User is not authenticated");
+    }
+
+    const title = formDataValue.get("title")?.toString().trim() || "";
+    const description =
+      formDataValue.get("description")?.toString().trim() || "";
+    const ownerId = data.user.id;
+
+    if (!title || !description) {
+      throw new Error("Title and description are required");
+    }
+
     await prisma.recipe.create({
       data: { title, description, ownerId },
     });
-
-    revalidatePath("/recipes");
   } catch (error) {
     console.error("Error creating recipe:", error);
     throw new Error("Failed to create recipe");
   }
+
+  revalidatePath("/", "layout");
 }

@@ -1,4 +1,4 @@
-import { signout } from "../actions/signout";
+import { signout } from "@/app/actions/signout";
 
 export default async function LogoutButton() {
   return (

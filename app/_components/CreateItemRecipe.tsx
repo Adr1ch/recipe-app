@@ -1,6 +1,6 @@
 "use client";
 
-import { createRecipe } from "../actions/recipes";
+import { createRecipe } from "@/app/actions/recipes";
 
 export default function CreateRecipe() {
   return (

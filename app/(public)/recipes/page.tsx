@@ -5,7 +5,7 @@ export default async function RecipesListingPage() {
   const data = await getRecipe();
 
   return (
-    <main>
+    <main className="flex w-full flex-col gap-8 row-start-2 items-center sm:items-start">
       <RecipeList title="Список усіх рецептів" recipes={data} />
     </main>
   );

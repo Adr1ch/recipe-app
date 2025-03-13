@@ -43,6 +43,18 @@ export default async function HeaderNavigations() {
           >
             Мої рецепти
           </Link>
+          <Link
+            href="/profile"
+            className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          >
+            Мій профайл
+          </Link>
+          <Link
+            href="/create-recipe"
+            className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          >
+            Створити рецепт
+          </Link>
           <form className="w-max" action={signout}>
             <button
               type="submit"
