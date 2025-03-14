@@ -21,7 +21,9 @@ export async function login(formData: FormData) {
     redirect("/error");
   }
 
-  await addOrCreateUser();
+  if (!error && signInData.user) {
+    await addOrCreateUser();
+  }
 
   revalidatePath("/", "layout");
   redirect("/");
@@ -41,8 +43,6 @@ export async function signup(formData: FormData) {
     console.error("Signup error:", error);
     redirect("/error");
   }
-
-  await addOrCreateUser();
 
   revalidatePath("/", "layout");
   redirect("/instruction");
