@@ -20,10 +20,9 @@ export async function GET(request: NextRequest) {
 
     if (!error) {
       await addOrCreateUser();
-      redirect(next);
+      return redirect(next);
     }
   }
 
-  // redirect the user to an error page with some instructions
-  redirect("/error");
+  return redirect("/error");
 }

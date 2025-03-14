@@ -18,7 +18,7 @@ export async function login(formData: FormData) {
   );
 
   if (error || !signInData.user) {
-    redirect("/error");
+    return redirect("/error");
   }
 
   if (!error && signInData.user) {
@@ -26,7 +26,7 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  return redirect("/");
 }
 
 export async function signup(formData: FormData) {
@@ -41,9 +41,9 @@ export async function signup(formData: FormData) {
 
   if (error || !signUpData.user) {
     console.error("Signup error:", error);
-    redirect("/error");
+    return redirect("/error");
   }
 
   revalidatePath("/", "layout");
-  redirect("/instruction");
+  return redirect("/instruction");
 }
