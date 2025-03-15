@@ -1,6 +1,23 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+const ROUTES = {
+  HOMEPAGE: "/",
+  LOGIN: "/login",
+  MY_RECIPES: "/my-recipes",
+  CREATE_RECIPE: "/create-recipe",
+  RECIPES: "/recipes",
+  PROFILE: "/profile",
+  INSTRUCTION: "/instruction",
+};
+
+const PUBLIC_ROUTES = [
+  ROUTES.HOMEPAGE,
+  ROUTES.RECIPES,
+  ROUTES.LOGIN,
+  ROUTES.INSTRUCTION,
+];
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
@@ -39,13 +56,32 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const publicRoutes = ["/login", "/auth", "/instruction", "/recipes"];
-
-  if (!user && !publicRoutes.includes(request.nextUrl.pathname)) {
+  if (
+    !user &&
+    !PUBLIC_ROUTES.some((route) => request.nextUrl.pathname.startsWith(route))
+  ) {
+    // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = ROUTES.LOGIN;
     return NextResponse.redirect(url);
   }
+
+  if (
+    (user && request.nextUrl.pathname.startsWith(ROUTES.LOGIN)) ||
+    request.nextUrl.pathname === ROUTES.HOMEPAGE
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = ROUTES.RECIPES;
+    return NextResponse.redirect(url);
+  }
+
+  // const publicRoutes = ["/login", "/auth", "/instruction", "/recipes"];
+
+  // if (!user && !publicRoutes.includes(request.nextUrl.pathname)) {
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = "/login";
+  //   return NextResponse.redirect(url);
+  // }
 
   // if (
   //   !user &&

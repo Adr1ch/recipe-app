@@ -13,12 +13,18 @@ export async function GET(request: NextRequest) {
   if (token_hash && type) {
     const supabase = await createClient();
 
-    const { error } = await supabase.auth.verifyOtp({
-      type,
-      token_hash,
+    const { error: verifyOtpError, ...verifyOtpData } =
+      await supabase.auth.verifyOtp({
+        type,
+        token_hash,
+      });
+
+    console.log("MSG: reote handle GET", {
+      verifyOtpError,
+      verifyOtpData,
     });
 
-    if (!error) {
+    if (!verifyOtpError) {
       await addOrCreateUser();
       return redirect(next);
     }
