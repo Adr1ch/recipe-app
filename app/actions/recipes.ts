@@ -31,6 +31,23 @@ export async function getUserRecipes() {
   }
 }
 
+export async function getRecipeById(recipeId: string) {
+  try {
+    const recipe = await prisma.recipe.findUnique({
+      where: { id: recipeId },
+    });
+
+    if (!recipe) {
+      throw new Error("Recipe not found");
+    }
+
+    return recipe;
+  } catch (error) {
+    console.error("Error fetching recipe:", error);
+    throw new Error("Failed to fetch recipe");
+  }
+}
+
 export async function createRecipe(formDataValue: FormData) {
   try {
     const supabase = await createClient();

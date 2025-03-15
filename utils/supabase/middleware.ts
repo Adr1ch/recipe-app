@@ -66,12 +66,9 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (
-    (user && request.nextUrl.pathname.startsWith(ROUTES.LOGIN)) ||
-    request.nextUrl.pathname === ROUTES.HOMEPAGE
-  ) {
+  if (user && request.nextUrl.pathname.startsWith(ROUTES.LOGIN)) {
     const url = request.nextUrl.clone();
-    url.pathname = ROUTES.RECIPES;
+    url.pathname = ROUTES.HOMEPAGE;
     return NextResponse.redirect(url);
   }
 

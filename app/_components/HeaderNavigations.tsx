@@ -10,61 +10,66 @@ export default async function HeaderNavigations() {
   } = await supabase.auth.getUser();
 
   return (
-    <nav className="flex gap-4">
-      {!user ? (
-        <>
-          <Link
-            href="/login"
-            className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
-          >
-            Логін / Реєстрація
-          </Link>
-        </>
-      ) : null}
-      {user ? (
+    <header className="w-full bg-white shadow-md dark:bg-gray-900">
+      <nav className="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
         <Link
           href="/"
-          className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          className="text-lg font-bold text-indigo-600 dark:text-white"
         >
-          Домашня
+          Рецепти
         </Link>
-      ) : null}
-      <Link
-        href="/recipes"
-        className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
-      >
-        Усі рецепти
-      </Link>
-      {user ? (
-        <>
+
+        <div className="flex flex-wrap items-center space-x-4">
           <Link
-            href="/my-recipes"
-            className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
+            href="/recipes"
+            className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-500"
           >
-            Мої рецепти
+            Усі рецепти
           </Link>
-          <Link
-            href="/profile"
-            className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
-          >
-            Мій профайл
-          </Link>
-          <Link
-            href="/create-recipe"
-            className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
-          >
-            Створити рецепт
-          </Link>
-          <form className="w-max" action={signout}>
-            <button
-              type="submit"
-              className="w-max py-1 px-2 mt-4 rounded-md bg-indigo-500 hover:bg-indigo-600 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          {user && (
+            <>
+              <Link
+                href="/my-recipes"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-500"
+              >
+                Мої рецепти
+              </Link>
+              <Link
+                href="/create-recipe"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-500"
+              >
+                Створити рецепт
+              </Link>
+              <Link
+                href="/profile"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-500"
+              >
+                Мій профіль
+              </Link>
+            </>
+          )}
+        </div>
+
+        <div>
+          {!user ? (
+            <Link
+              href="/login"
+              className="px-4 py-2 text-sm font-medium bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
             >
-              Розлогін
-            </button>
-          </form>
-        </>
-      ) : null}
-    </nav>
+              Логін / Реєстрація
+            </Link>
+          ) : (
+            <form action={signout}>
+              <button
+                type="submit"
+                className="px-4 py-2 text-sm font-medium bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Вийти
+              </button>
+            </form>
+          )}
+        </div>
+      </nav>
+    </header>
   );
 }

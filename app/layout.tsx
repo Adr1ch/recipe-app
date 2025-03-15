@@ -24,14 +24,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <html lang="en">
+    //   <body
+    //     className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    //   >
+    //     <HeaderNavigations />
+    //     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    //       {children}
+    //     </div>
+    //   </body>
+    // </html>
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a192f] text-gray-200`}
       >
-        <HeaderNavigations />
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+        <header className="w-full bg-[#112240] shadow-md py-4 px-6">
+          <HeaderNavigations />
+        </header>
+        <main className="container mx-auto px-4 py-8 min-h-screen">
           {children}
-        </div>
+        </main>
       </body>
     </html>
   );
